@@ -71,6 +71,9 @@ class SpringBootMybatisDemo2ApplicationTests {
         System.out.println(studentMapper.batchSave(studentList));
     }
 
+    /**
+     * 分页测试
+     */
     @Test
     public void getPageData() {
         //设置分页参数，pageNum：当前页数，pageSize：每页显示条数
