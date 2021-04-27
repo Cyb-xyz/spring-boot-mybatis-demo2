@@ -59,6 +59,9 @@ class SpringBootMybatisDemo2ApplicationTests {
         System.out.println(studentMapper.batchUpdate(list));
     }
 
+    /**
+     * 批量新增
+     */
     @Test
     public void batchSave() {
         Student student1 = new Student("张三", 23, "男", "西安", 45, 78, "2021-07-08");
@@ -72,7 +75,7 @@ class SpringBootMybatisDemo2ApplicationTests {
     }
 
     /**
-     * 分页实例测试222
+     * 分页实例测试
      */
     @Test
     public void getPageData() {
