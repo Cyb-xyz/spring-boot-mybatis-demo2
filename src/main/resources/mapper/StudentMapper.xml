@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyz.dao.StudentMapper">
+    <!-- 新增学生信息 -->
+    <insert id="save" parameterType="Student">
+        insert into student3
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name.trim() != '' ">name,</if>
+            <if test="age != null">age,</if>
+            <if test="sex != null and sex.trim() != '' ">sex,</if>
+            <if test="address != null and address.trim() != '' ">address,</if>
+            <if test="math != null">math,</if>
+            <if test="english != null">english,</if>
+            <if test="data_date != null and data_date.trim != '' ">data_date,</if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name.trim() != '' ">#{name},</if>
+            <if test="age != null">#{age},</if>
+            <if test="sex != null and sex.trim() != '' ">#{sex},</if>
+            <if test="address != null and address.trim() != '' ">#{address},</if>
+            <if test="math != null">#{math},</if>
+            <if test="english != null">#{english},</if>
+            <if test="data_date != null and data_date.trim != '' ">#{data_date},</if>
+        </trim>
+    </insert>
+
+    <!--根据id删除数据-->
+    <delete id="delete" parameterType="int">
+        delete from student3 where id=#{id}
+    </delete>
+    <!-- 根据ID查询学生信息 -->
+    <select id="selectById" resultType="Student" parameterType="int">
+        select
+            id, name, age, sex, address, math, english, data_date
+        from
+            student3 where id = #{id}
+    </select>
+    <!-- 查询全部学生信息 -->
+    <select id="selectAll" resultType="Student">
+        select
+            id, name, age, sex, address, math, english, data_date
+        from
+            student3
+    </select>
+
+    <!-- 更新学生信息 -->
+    <update id="update" parameterType="Student">
+        update student3
+        <set>
+            <if test="name != null and name.trim() != '' ">
+                name=#{name},
+            </if>
+            <if test="age != null">
+                age=#{age},
+            </if>
+            <if test="sex != null and sex.trim() != '' ">
+                sex=#{sex},
+            </if>
+            <if test="address != null and address.trim() != '' ">
+                address=#{address},
+            </if>
+            <if test="math != null">math=#{math},</if>
+            <if test="english != null">
+                english=#{english},
+            </if>
+            <if test="data_date != null and data_date.trim != '' ">
+                data_date=#{data_date},
+            </if>
+        </set>
+        where
+            id=#{id}
+    </update>
+
+    <!--批量删除学生信息-->
+    <delete id="batchDelete" parameterType="int">
+        delete from student3 where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--逻辑删除-->
+    <update id="batchUpdate" parameterType="int">
+        update student3 set is_valid = 0 where id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--批量新增-->
+    <insert id="batchSave" parameterType="Student">
+        insert into student3 (name, age, sex, address, math, english, data_date)
+        values 
+        <foreach collection="list" item="stu" separator=",">
+            (
+            #{stu.name},#{stu.age},#{stu.sex},#{stu.address},#{stu.math},#{stu.english},#{stu.data_date}
+            )
+        </foreach>
+    </insert>
+    <!--分页查询-->
+    <select id="getPageData" resultType="Student">
+        select * from student3
+    </select>
+
+
+</mapper>
