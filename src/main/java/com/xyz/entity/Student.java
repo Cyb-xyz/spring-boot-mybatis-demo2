@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class Student implements Serializable {
 
     private int id;
-    private String name;
-    private int age;
-    private String sex;
+    private String name;//姓名
+    private int age;//年龄
+    private String sex;//性别
     private String address;
     private int math;
     private int english;
