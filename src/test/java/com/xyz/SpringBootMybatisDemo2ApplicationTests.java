@@ -72,7 +72,7 @@ class SpringBootMybatisDemo2ApplicationTests {
     }
 
     /**
-     * 分页测试
+     * 分页实例测试
      */
     @Test
     public void getPageData() {
